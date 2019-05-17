@@ -16,8 +16,8 @@ def check_point(point, map_img):
     ## 点的碰撞检测工具
     point = np.mat(point)
     feasibility = True
-    if (int(point[:, 0]) < 499 and 
-        int(point[:, 1]) < 499 and 
+    if (int(point[:, 0]) < map_img.shape[0] and 
+        int(point[:, 1]) < map_img.shape[1] and 
         int(point[:, 0]) >= 0 and 
         int(point[:, 1]) >= 0):
         if map_img[int(point[:, 1]), int(point[:, 0])] == 0:

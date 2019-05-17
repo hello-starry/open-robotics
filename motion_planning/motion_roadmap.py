@@ -104,7 +104,7 @@ class MotionRoadmap(object):
         print('开始 RRT 路径规划，请等待...')
         # 关键字参数处理
         step_size = 20
-        threshold = 20 # 距离阈值，小于此值将被视作同一个点
+        threshold = 20 # 距离阈值，小于此值将被视作同一个点，不可大于 step_size
         limit_try = 20000
         if 's' in param:
             step_size = param['s']
@@ -139,7 +139,7 @@ class MotionRoadmap(object):
           # 距离最小点的索引
           index_close = np.argmin(mat_distance, 0)[0, 0] #末尾索引用以取数值，否则为矩阵
           point_close = rrt_tree[index_close, 0 : 2]
-          
+
           ## 从距离最小点向采样点移动 step_size 距离，并进行碰撞检测
           theta_dir = math.atan2(sample[0, 0] - point_close[0, 0], sample[0, 1] - point_close[0, 1])
           point_new = point_close + step_size * np.mat([math.sin(theta_dir), math.cos(theta_dir)])
@@ -148,7 +148,7 @@ class MotionRoadmap(object):
           if not mpt.check_path(point_close, point_new, img_binary):
               num_try = num_try + 1
               continue
-          
+
           ## 成功检测
           if mpt.straight_distance(point_new, self.point_goal) < threshold:
               path_found = True
@@ -165,7 +165,7 @@ class MotionRoadmap(object):
           # 为新点加入父节点索引
           point_new = np.hstack((point_new, [[index_close]]))
           rrt_tree = np.vstack((rrt_tree, point_new))
-        
+
         if path_found == True:
             print('规划成功！')
             self.rrt_tree = rrt_tree
@@ -230,8 +230,6 @@ class MotionRoadmap(object):
         for x in range(img_potential.shape[0]):
             for y in range(img_potential.shape[1]):
                 # 目标点的引力场 ug
-                
-                
                 ug = k_a * mpt.straight_distance(np.mat([x, y]), self.point_goal)[0, 0]
                 # 障碍物的斥力场 uo
                 # 最近障碍物的距离
@@ -289,14 +287,14 @@ class MotionRoadmap(object):
 if __name__=="__main__": 
     ## 预处理
     # 图像路径
-    
-    image_path = "/home/jimchan/Documents/motion_planning/map_1.bmp"
+
+    image_path = "/home/jimchan/Documents/motion_planning/map_4.bmp"
     # 读取图像
     img = cv2.imread(image_path)# np.ndarray BGR uint8
-    img = cv2.resize(img,(100,100))
+    img = cv2.resize(img,(500,500))
     mr = MotionRoadmap(img)
     #mr.rrt_planning(s=20, t=20, l=15000)
     #mr.point_strat = np.mat([0,99])
     #mr.point_goal = np.mat([95,5])
-    mr.pf_planning()
+    mr.rrt_planning()
     
