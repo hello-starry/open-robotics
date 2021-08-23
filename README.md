@@ -51,7 +51,7 @@
 
 给定二连杆机器人的连杆长度、手系和关节运动范围，就可以绘制出工作空间的形状。
 
-![](./Toolbox/twolink_ws_example.png)
+![](https://raw.githubusercontent.com/chenjm1109/open-robotics/main/Toolbox/02_twolink_workspace/twolink_ws_example.png)
 
 ## 3. 机器人技术系列教程使用说明与示例
 
