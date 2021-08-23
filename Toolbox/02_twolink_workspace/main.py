@@ -1,23 +1,29 @@
 # -*- coding: utf-8 -*-
+
 import numpy as np
 import math
 import matplotlib.pyplot as plt
 
+plt.rcParams['xtick.direction'] = 'in'
+plt.rcParams['ytick.direction'] = 'in'
+plt.rcParams['axes.edgecolor'] = '#aaaaaa'
+plt.rcParams['axes.linewidth'] = '1'
+
 PI = 3.1415926535
 DELTA_THETA = 0.1*PI/180
-LINE_COLOR = {'solid':  '#e60011',
-              'dotted': '#000000',
-              'thick':  '#007ac1'}
+LINE_COLOR = {'solid':  '#b85450',
+              'dotted': '#999999',
+              'thick':  '#6c8ebf'}
 
-LINE_WIDTH = {'solid':  3,
+LINE_WIDTH = {'solid':  5,
               'dotted': 1,
-              'thick':  3}
+              'thick':  5}
 
 LINE_STYLE = {'solid':  '-',
               'dotted': '--',
               'thick':  '-'}
 
-class TwoLinkWorkspace:
+class ScaraWorkspace:
     def __init__(self, L1 = 400, L2 = 400):
         self.L1 = L1
         self.L2 = L2
@@ -36,26 +42,23 @@ class TwoLinkWorkspace:
         
     def plot(self, config = 0):
         assert (0==config or 1==config), "config只能为0（右手）或1（左手）"
-        
-        
-        fig = plt.figure(figsize=(6, 6))
+         
+        fig = plt.figure(figsize=(6, 6), facecolor='#fafaff')
         ax = fig.add_subplot(1, 1, 1)
-        ax.grid('--')
+        ax.set_facecolor('#fafaff')
+        ax.tick_params(axis='x',colors='#aaaaaa')
+        ax.tick_params(axis='y',colors='#aaaaaa')
+
         lim = (self.L1 + self.L2)*1.1
         ax.set_xlim([-lim, lim])
         ax.set_ylim([-lim, lim])
-        ax.set_xlabel('x (mm)')
-        ax.set_ylabel('y (mm)')
-        
+        ax.set_xlabel('x (mm)', color="#aaaaaa")
+        ax.set_ylabel('y (mm)', color="#aaaaaa")
+           
         self.plot_workspace(ax, config, arc_type='thick')
         self.plot_guide(ax, config, arc_type='dotted')
         self.plot_link(ax, config, arc_type='solid')
         
-        # 绘制连杆
-        self.plot_testspace(ax)
-
-        
-    
     def plot_workspace(self, ax, config=0, arc_type='thick'):
         # 绘制可达区域
         if config:
@@ -161,35 +164,8 @@ class TwoLinkWorkspace:
                 linewidth = LINE_WIDTH[arc_type],
                 linestyle = LINE_STYLE[arc_type])
 
-    def plot_testspace(self, ax):
-        # 绘制测试区
-        RB, LB, FB, BB = self.RB, self.LB, self.FB, self.BB
-        x  = [BB, FB]
-        y1 = [LB, LB]
-        y2 = [RB, RB]
         
-        # 测试平面
-        ax.fill_between(x, y1, facecolor = 'lightgreen')
-        ax.fill_between(x, y2, facecolor = 'lightgreen')
-        ax.text(BB, RB, '('+str(BB)+', '+str(RB)+')', horizontalalignment='center', verticalalignment='top')
-        ax.text(BB, LB, '('+str(BB)+', '+str(LB)+')', horizontalalignment='center', verticalalignment='bottom')
-        ax.text(FB, RB, '('+str(FB)+', '+str(RB)+')', horizontalalignment='right', verticalalignment='bottom')
-        ax.text(FB, LB, '('+str(FB)+', '+str(LB)+')', horizontalalignment='right', verticalalignment='top')
-        ax.scatter(BB, RB, color='k')
-        ax.scatter(BB, LB, color='k')
-        ax.scatter(FB, RB, color='k')
-        ax.scatter(FB, LB, color='k')
         
-        # 圆
-        RMAX, RMIN = self.DMAX/2, self.DMIN/2
-        theta = np.linspace(0,2*PI,36)
-        x1 = (FB+BB)/2+RMAX*np.cos(theta)
-        y1 = (RB+LB)/2+RMAX*np.sin(theta)
-        ax.fill(x1, y1, facecolor = 'green')
-        x2 = (FB+BB)/2+RMIN*np.cos(theta)
-        y2 = (RB+LB)/2+RMIN*np.sin(theta)
-        ax.fill(x2, y2, facecolor = 'orange')
-
 if __name__ == "__main__":
-    two_link = TwoLinkWorkspace()
-    two_link.plot(1)
+    SW = ScaraWorkspace()
+    SW.plot(0)
