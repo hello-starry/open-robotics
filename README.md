@@ -47,6 +47,16 @@
 
 ### 2.1 根据机器人DH坐标系生成结构简图
 
+D-H法是研究机器人学经常要用到的工具。这个脚本可以根据给出的D-H表生成对应的3维坐标系结构简图。支持标准DH(SDH)和改进DH(MDH)
+
+#### 标准DH
+
+![](https://raw.githubusercontent.com/chenjm1109/open-robotics/main/Toolbox/01_dh_view/dh_example.png)
+
+#### 改进DH
+
+![](https://raw.githubusercontent.com/chenjm1109/open-robotics/main/Toolbox/01_dh_view/mdh_example.png)
+
 ### 2.2 绘制二连杆机器人工作空间
 
 给定二连杆机器人的连杆长度、手系和关节运动范围，就可以绘制出工作空间的形状。
