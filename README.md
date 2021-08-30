@@ -7,7 +7,7 @@
 
 本项目当前包含：
 
-1. 有助于提高机器人学的学习与研究效率的python小工具集
+1. 有助于提高机器人学算法学习与研究效率的python小工具集
 2. 课程「机器人算法开发实践」的任务说明与代码示例
 3. [「小明工坊」](https://www.zhihu.com/people/xiao-ming-gong-fang/posts)在知乎、B站、古月居等公开平台发表教程的源工程
 
@@ -15,18 +15,18 @@
 
 ## 目录
 
-1. [机器人学python小工具说明与示例](#1-机器人学pyhon小工具说明与示例)
+1. [机器人算法小工具说明与示例](#1-机器人算法小工具说明与示例)
 2. [机器人算法开发实践](#2-机器人算法开发实践)
 3. [机器人技术系列教程使用说明与示例](#3-机器人技术系列教程使用说明与示例)
 
-## 1. 机器人学python小工具说明与示例
+## 1 机器人算法小工具说明与示例
 
-「机器人学python小工具」是我在做机器人算法时，为了提高效率而编写的python脚本。这些工具本身并不包含机器人学算法知识，大都只是一些数据分析、绘图小程序。利用这些脚本，便于我更直观地分析学习和设计自己地机器人算法，分析机器人出现问题。
+「机器人算法小工具」是我在做机器人算法时，为了提高效率而编写的python脚本。这些工具本身并不包含机器人学算法知识，大都只是一些数据分析、绘图小程序。利用这些脚本，便于我更直观地分析学习和设计自己地机器人算法，分析机器人出现问题。
 
 ### 目录
 
-1. [可视化：绘制机器人DH坐标系](https://raw.githubusercontent.com/chenjm1109/open-robotics/main/Toolbox/01_dh_view)
-2. [可视化：绘制二连杆机器人工作空间](https://raw.githubusercontent.com/chenjm1109/open-robotics/main/Toolbox/02_twolink_workspace)
+1. [可视化：绘制机器人DH坐标系](https://github.com/chenjm1109/open-robotics/tree/main/Toolbox/01_dh_view)
+2. [可视化：绘制二连杆机器人工作空间](https://github.com/chenjm1109/open-robotics/tree/main/Toolbox/02_twolink_workspace)
 3. 辅助计算：机器人常用位姿表达的转换
 4. 可视化：采样法绘制任意机器人的工作空间
 5. 辅助计算：位置、速度、加速度数据的相互转换
@@ -49,11 +49,11 @@ D-H法是研究机器人学经常要用到的工具。这个脚本可以根据�
 
 ![](https://raw.githubusercontent.com/chenjm1109/open-robotics/main/Toolbox/02_twolink_workspace/twolink_ws_example.png)
 
-## 2. 机器人算法开发实践
+## 2 机器人算法开发实践
 
 ### 目录
 
-- [第1次任务：实现机器人算法类的基本架构](https://raw.githubusercontent.com/chenjm1109/open-robotics/main/Course/Section01/material.ipynb)
+- [第1次任务：实现机器人算法类的基本架构](https://github.com/chenjm1109/open-robotics/blob/main/Course/Section01/material.ipynb)
 - 第2次任务：机器人运动学算法的实现
 - 第3次任务：关节空间线性轨迹规划
 - 第4次任务：雅可比矩阵与奇异位形判定
@@ -70,7 +70,7 @@ D-H法是研究机器人学经常要用到的工具。这个脚本可以根据�
 
 截至2020年8月，本门课程的内容完全由我单独设计，其中必然有不妥之处。作为 Open Robotics 项目的一部分，如果你有兴趣，十分欢迎参与到课程的建设和优化中，为更多优秀的同学进入机器人领域作一分贡献。
 
-## 3. 机器人技术系列教程使用说明与示例
+## 3 机器人技术系列教程使用说明与示例
 
 「机器人技术系列教程」是指我在知乎、B站、古月居等各平台发表过的有关机器人技术的博客文章，这些文章大都有配套的工程源码。坦白说，这些源码的编写时间比较早，质量并不高。我在整理本项目的过程中，正在陆续对相关代码进行优化，这种优化将会更加关注代码的**可读性**而非效率。
 
