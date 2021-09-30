@@ -1,0 +1,39 @@
+:root {
+    --md-primary-fg-color:        #007acc;
+    --md-primary-fg-color--light: #007acc;
+    --md-primary-fg-color--dark:  #007acc;
+  }
+
+
+img {
+  margin: auto;
+  box-shadow: 0rem 0rem 0.25rem #888;
+  width: 100%;
+}
+
+figcaption {
+  color: #333;
+  font-style: normal!important;
+}
+
+blockquote {
+  border-left: 0rem solid #007acc!important;
+  background-color: rgba(0, 122, 204, 0.1);
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  border-radius: 0.5rem;
+}
+
+hr {
+  border-bottom: 0.05rem solid #ccc!important;
+}
+
+h1 {
+  padding-left: 1rem;
+  border-left: 0.25rem solid #007acc!important;
+}
+
+h2 {
+  padding-top: 0.25rem;
+  border-top: 0.05rem solid #ccc!important;
+}
