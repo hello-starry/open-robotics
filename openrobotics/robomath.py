@@ -1,29 +1,44 @@
 import numpy as np
 import math
 
+np.set_printoptions(suppress=True, precision=4) # 取消科学计数法
+
+ZERO = 1e-6
 PI = math.pi
 TO_DEG = 180/PI
 TO_RAD = PI/180
 
-def cos(angle):
+def cosd(angle):
     return math.cos(angle*TO_RAD)
 
-def sin(angle):
+def sind(angle):
     return math.sin(angle*TO_RAD)
+
+def cos(angle):
+    return math.cos(angle)
+
+def sin(angle):
+    return math.sin(angle)
+
+def atan2(y, x):
+    return math.atan2(y, x)
+
+def sqrt(x):
+    return math.sqrt(x)
 
 def rot_x(angle):
     return np.array([[ 1, 0,           0         ],
-                     [ 0, cos(angle), -sin(angle)],
-                     [ 0, sin(angle),  cos(angle)]])
+                     [ 0, cosd(angle), -sind(angle)],
+                     [ 0, sind(angle),  cosd(angle)]])
 
 def rot_y(angle):
-    return np.array([[ cos(angle), 0, sin(angle)],
+    return np.array([[ cosd(angle), 0, sind(angle)],
                      [ 0,          1, 0         ],
-                     [-sin(angle), 0, cos(angle)]])
+                     [-sind(angle), 0, cosd(angle)]])
 
 def rot_z(angle):
-    return np.array([[ cos(angle), -sin(angle), 0],
-                     [ sin(angle),  cos(angle), 0],
+    return np.array([[ cosd(angle), -sind(angle), 0],
+                     [ sind(angle),  cosd(angle), 0],
                      [ 0,           0,          1]])
 
 def rot_inv(rot):
