@@ -5,3 +5,5 @@ open_robotics.egg-info/PKG-INFO
 open_robotics.egg-info/SOURCES.txt
 open_robotics.egg-info/dependency_links.txt
 open_robotics.egg-info/top_level.txt
+openrobotics/__init__.py
+openrobotics/robotics.py

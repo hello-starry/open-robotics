@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="open-robotics",
+    name="openrobotics",
     version="1.0",
     author="JinminCHEN",
     author_email="chenjm1109@foxmail.com",
