@@ -2,11 +2,13 @@ LICENSE
 README.md
 setup.py
 openrobotics/__init__.py
-openrobotics/delta_robot.py
 openrobotics/robomath.py
 openrobotics/robot.py
-openrobotics/stewart_robot.py
 openrobotics.egg-info/PKG-INFO
 openrobotics.egg-info/SOURCES.txt
 openrobotics.egg-info/dependency_links.txt
 openrobotics.egg-info/top_level.txt
+openrobotics/robotics/__init__.py
+openrobotics/robotics/delta_robot.py
+openrobotics/robotics/stewart_robot.py
+test/test_robomath.py

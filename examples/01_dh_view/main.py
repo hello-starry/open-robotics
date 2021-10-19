@@ -51,7 +51,7 @@ def dh_view(dh_list, dh_type="mdh"):
         T_list = prase_dh(dh_list)
     
     fig = plt.figure(figsize=(6,6))
-    ax = Axes3D(fig)
+    ax = fig.add_subplot(111, projection='3d')
     ax.view_init(elev=20., azim=45.)
     ax.set_xlabel("x(m)")
     ax.set_ylabel("y(m)")
@@ -79,19 +79,35 @@ def dh_view(dh_list, dh_type="mdh"):
         ax.plot([T_list[i, 0, 3], T_list[i, 0, 3]+T_list[i, 0, 2]*scale],
                 [T_list[i, 1, 3], T_list[i, 1, 3]+T_list[i, 1, 2]*scale],
                 [T_list[i, 2, 3], T_list[i, 2, 3]+T_list[i, 2, 2]*scale], 
-                color="#3775a9", linewidth=3)
+                color="#9cdcfe", linewidth=3)
+    plt.show()
 
 if __name__ == "__main__":
-    # MDH参数表  alpha   a       d       theta
-    dh_list = [[ 0.0,    0.0,    250.0,  20.0],
-                [ 0.0,   150,    0.0,    -20.0],
-                [ 180.0, 150,    150.0,   0.0],
-                [ 0.0,   0.0,    0.0,    20.0]]
-    dh_view(dh_list, dh_type="mdh")
+    # # MDH参数表  alpha   a       d       theta
+    # dh_list = [[ 0.0,    0.0,    250.0,  20.0],
+    #             [ 0.0,   150,    0.0,    -20.0],
+    #             [ 180.0, 150,    150.0,   0.0],
+    #             [ 0.0,   0.0,    0.0,    20.0]]
+    # dh_view(dh_list, dh_type="mdh")
+    
+    # # DH参数表   alpha   a       d       theta
+    # dh_list = [[ 0.0,    150,    250,    20.0],
+    #            [ 180,    150,    0.0,    -20.0],
+    #            [ 0.0,    0.0,    150.0,   0.0],
+    #            [ 0.0,    0.0,    0.0,    20.0]]
+    # dh_view(dh_list, dh_type="dh")
+
+    # # MDH参数表  alpha   a       d       theta
+    # dh_list = [[ 0.0,    0.0,    250.0,  20.0],
+    #             [ 0.0,   150,    0.0,    -20.0],
+    #             [ 180.0, 150,    150.0,   0.0],
+    #             [ 0.0,   0.0,    0.0,    20.0]]
+    # dh_view(dh_list, dh_type="mdh")
     
     # DH参数表   alpha   a       d       theta
-    dh_list = [[ 0.0,    150,    250,    20.0],
-               [ 180,    150,    0.0,    -20.0],
-               [ 0.0,    0.0,    150.0,   0.0],
-               [ 0.0,    0.0,    0.0,    20.0]]
+    dh_list = [[ 90.0,   0,      242,     0.0],
+               [ 0.0,    225,    0.0,     0.0],
+               [ 90.0,    0.0,   0.0,    0.0],
+               [ 90.0,    0.0,   228.86, 0.0],
+               [ 180.0,    0.0,   0.0,    0.0]]
     dh_view(dh_list, dh_type="dh")

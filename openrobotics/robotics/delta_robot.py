@@ -2,7 +2,7 @@ from openrobotics.robomath import *
 
 
 class DeltaRobot(object):
-    def __init__(self, param: list) -> None:
+    def __init__(self, param:list=[135.0, 300.0, 43.0, 700.0, 59.5, 60.0]) -> None:
         """
         构造Delta机器人
 
@@ -98,10 +98,3 @@ class DeltaRobot(object):
         Angle = (atan2(zA, xA-xj)-atan2(param[2], param[1])) * TO_DEG
         
         return Angle
-
-if __name__ == "__main__":
-    delta = DeltaRobot([135.0, 300.0, 43.0, 700.0, 59.5, 60.0])
-    end_pos = delta.calc_forward_kinematics([10.0, 20.0, 30.0])
-    joint_pos = delta.calc_inverse_kinematics(end_pos)
-    print(end_pos)
-    print(joint_pos)

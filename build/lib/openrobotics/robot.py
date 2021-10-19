@@ -1,6 +1,6 @@
 from numpy import ndarray
-from openrobotics.delta_robot import *
-from openrobotics.stewart_robot import *
+from openrobotics.robotics.delta_robot import *
+from openrobotics.robotics.stewart_robot import *
 
 
 
