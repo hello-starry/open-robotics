@@ -1,3 +1,12 @@
+#!/usr/bin/env python
+# -*-coding:utf-8 -*-
+
+"""六轴机器人的运动学算法模块.
+
+本模块包含六轴机器人的正运动学、逆运动学
+- 参考资料：https://zhuanlan.zhihu.com/p/22304823
+"""
+
 from openrobotics.robomath import *
 
 
@@ -41,6 +50,8 @@ class SixAxisRobot(object):
 
         trans[0,0] =  s6*(s1*c4-c1*s4*c23)+c6*(c5*(s4*s1+c4*c1*c23)-s5*c1*s23)
         trans[1,0] = -s6*(c1*c4+s1*s4*c23)-c6*(c5*(s4*c1-c4*s1*c23)+s1*s5-s23)
+        trans[2,0] =  c6*(c23*s5+s23*c4*c5)-s23*s4*s6
+        trans[0,1] =  c6*(s1*c4-s4*c1*c23)
 
 
         return end_pos
