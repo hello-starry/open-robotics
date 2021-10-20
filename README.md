@@ -1,6 +1,6 @@
 # 开源机器人学 | Open Robotics
 
-![version](https://img.shields.io/badge/version-v0.0.1-yellow.svg)
+![version](https://img.shields.io/badge/version-v0.1-yellow.svg)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 **开源机器人学**是一个帮助机器人学习和研究的开源项目。本项目从2019年7月开始建设，并持续更新与维护中。
