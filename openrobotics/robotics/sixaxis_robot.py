@@ -2,7 +2,7 @@ from openrobotics.robomath import *
 
 
 class SixAxisRobot(object):
-    def __init__(self, param:list) -> None:
+    def __init__(self, param:list=[45.0,442.0,35.0,424.0,80.0]) -> None:
         """
         构造SixAxis机器人
 
@@ -39,7 +39,9 @@ class SixAxisRobot(object):
         s6 = sind(jp[5])
         s23 = sind(jp[1]+jp[2])
 
-        trans[0,0] = 
+        trans[0,0] =  s6*(s1*c4-c1*s4*c23)+c6*(c5*(s4*s1+c4*c1*c23)-s5*c1*s23)
+        trans[1,0] = -s6*(c1*c4+s1*s4*c23)-c6*(c5*(s4*c1-c4*s1*c23)+s1*s5-s23)
+
 
         return end_pos
 
