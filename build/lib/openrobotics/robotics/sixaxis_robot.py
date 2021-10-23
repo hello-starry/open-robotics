@@ -70,7 +70,3 @@ class SixAxisRobot(object):
         
         
         return joint_pos
-
-six_axis = SixAxisRobot()
-joint_pos = six_axis.calc_forward_kinematics([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
-print(f"The end_pos of six_axis is {joint_pos}")

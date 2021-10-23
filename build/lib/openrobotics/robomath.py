@@ -55,7 +55,7 @@ def rot_to_euler(rot):
         x = math.atan2(-rot[1,2], rot[1,1])
         y = math.atan2(-rot[2,0], sy)
         z = 0
-    return np.array([x, y, z])
+    return np.array([x, y, z])*TO_DEG
 
 def euler_to_rot(euler):
     return np.dot(rot_z(euler[2]), np.dot(rot_y(euler[1]), rot_x(euler[0])))
@@ -71,6 +71,11 @@ def pose_to_trans(pose):
     rot = euler_to_rot(euler)
     trans = compose_trans(pos, rot)
     return trans
+
+def trans_to_pose(trans):
+    pos, rot = decompose_trans(trans)
+    euler = rot_to_euler(rot)
+    return np.r_[pos, euler]
 
 def compose_trans(pos, rot):
     return np.array(np.r_[np.c_[np.array(rot), np.array([pos[0], pos[1], pos[2]])], [[0, 0, 0, 1]]])

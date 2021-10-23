@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="openrobotics",
-    version="1.0",
+    version="0.1",
     author="JinminCHEN",
     author_email="chenjm1109@foxmail.com",
     description="Open Robotics 开源机器人学库",
