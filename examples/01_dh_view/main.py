@@ -21,7 +21,7 @@ def prase_dh(dh_list):
     T_list = np.zeros((dh_list.shape[0]+1, 4, 4))
     T_list[0] = np.eye(4)
     for i in range(dh_list.shape[0]):
-        ap, a, d, t = dh_list[i,:]
+        a, ap, d, t = dh_list[i,:]
         T_trans = [[cos(t),   -sin(t)*cos(ap),  sin(t)*sin(ap),  a*cos(t)],
                    [sin(t),    cos(t)*cos(ap), -cos(t)*sin(ap),  a*sin(t)],
                    [0,         sin(ap),         cos(ap),         d       ],
@@ -35,7 +35,7 @@ def prase_mdh(mdh_list):
     T_list = np.zeros((mdh_list.shape[0]+1, 4, 4))
     T_list[0] = np.eye(4)
     for i in range(mdh_list.shape[0]):
-        ap, a, d, t = mdh_list[i,:]
+        a, ap, d, t = mdh_list[i,:]
         T_trans = [[cos(t),        -sin(t),          0,        a        ],
                    [sin(t)*cos(ap), cos(t)*cos(ap), -sin(ap), -d*sin(ap)],
                    [sin(t)*sin(ap), cos(t)*sin(ap),  cos(ap),  d*cos(ap)],
@@ -84,35 +84,35 @@ def dh_view(dh_list, dh_type="mdh"):
 
 if __name__ == "__main__":
     # ## Scara
-    # # MDH参数表  alpha   a       d       theta
+    # # MDH参数表  a     alpha       d       theta
     # dh_list = [[ 0.0,    0.0,    250.0,  20.0],
-    #             [ 0.0,   150,    0.0,    -20.0],
-    #             [ 180.0, 150,    150.0,   0.0],
+    #             [ 150.0,  0,    0.0,    -20.0],
+    #             [ 150.0, 180,    150.0,   0.0],
     #             [ 0.0,   0.0,    0.0,    20.0]]
     # dh_view(dh_list, dh_type="mdh")
     
-    # # DH参数表   alpha   a       d       theta
-    # dh_list = [[ 0.0,    150,    250,    20.0],
-    #            [ 180,    150,    0.0,    -20.0],
+    # # DH参数表   a     alpha       d       theta
+    # dh_list = [[ 150,    0,    250,    20.0],
+    #            [ 150,    180,    0.0,    -20.0],
     #            [ 0.0,    0.0,    150.0,   0.0],
     #            [ 0.0,    0.0,    0.0,    20.0]]
     # dh_view(dh_list, dh_type="dh")
 
     ## SixAxis
-    # MDH参数表  alpha   a       d       theta
+    # MDH参数表  a     alpha       d       theta
     dh_list = [[ 0.0,    0,      242,     0.0],
-               [ -90.0,   50,     0.0,    -90.0],
-               [ 0.0,   225.0,   0.0,     0.0],
-               [ -90.0,   50.0,   200.0,  0.0],
-               [  90.0,   0.0,    0.0,     0.0],
-               [ -90.0,   0.0,    50.0,    0.0]]
+               [ 50.0,  -90,     0.0,    -90.0],
+               [ 225.0,  0.0,   0.0,     0.0],
+               [ 50.0,  -90.0,   200.0,  0.0],
+               [ 0.0,    90.0,    0.0,     0.0],
+               [ 0.0,   -90.0,    50.0,    0.0]]
     dh_view(dh_list, dh_type="mdh")
     
-    # # DH参数表   alpha   a       d       theta
-    # dh_list = [[ 90.0,   0,      242,     0.0],
-    #            [ 0.0,    225,    0.0,    90.0],
-    #            [ 90.0,   0.0,    0.0,     0.0],
-    #            [-90.0,   0.0,   228.86,   0.0],
-    #            [ 90.0,   0.0,    0.0,     0.0],
-    #            [  0.0,   0.0,    50.0,    0.0]]
+    # # DH参数表   a      alpha       d       theta
+    # dh_list = [[ 50.0,   -90.0,    242,     0.0],
+    #            [ 225.0,   0.0,     0.0,    -90.0],
+    #            [ 50.0,   -90.0,    0.0,     0.0],
+    #            [ 0.0,     90.0,  228.86,   0.0],
+    #            [ 0.0,    -90.0,    0.0,     0.0],
+    #            [ 0.0,     0.0,    50.0,    0.0]]
     # dh_view(dh_list, dh_type="dh")
