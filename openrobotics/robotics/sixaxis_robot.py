@@ -11,7 +11,7 @@ from openrobotics.robomath import *
 
 
 class SixAxisRobot(object):
-    def __init__(self, param:list=[45.0, 442.0, 35.0, 424.0, 80.0]) -> None:
+    def __init__(self, param:list=[10.0, 20.0, 30.0, 40.0, 50.0]) -> None:
         """
         构造SixAxis机器人
 
@@ -29,48 +29,42 @@ class SixAxisRobot(object):
         self.__param = np.array(param)
 
     def calc_forward_kinematics(self, joint_pos: list):
-        jp = np.array(joint_pos)
-        param = self.__param
+        a1, a2, a3, d4, d6  = self.__param
         trans = np.eye(4)
-        
+        t1,t2,t3,t4,t5,t6 = np.array(joint_pos)*TO_RAD
 
-        c1 = cosd(jp[0])
-        c2 = cosd(jp[1])
-        c4 = cosd(jp[3])
-        c5 = cosd(jp[4])
-        c6 = cosd(jp[5])
-        c23 = cosd(jp[1]+jp[2])
-        s1 = sind(jp[0])
-        s2 = sind(jp[1])
-        s4 = sind(jp[3])
-        s5 = sind(jp[4])
-        s6 = sind(jp[5])
-        s23 = sind(jp[1]+jp[2])
+        trans[0,0] =  ((sin(t1)*sin(t4) + sin(t2 + t3)*cos(t1)*cos(t4))*cos(t5) + sin(t5)*cos(t1)*cos(t2 + t3))*cos(t6) - (-sin(t1)*cos(t4) + sin(t4)*sin(t2 + t3)*cos(t1))*sin(t6)
+        trans[1,0] =  ((sin(t1)*sin(t2 + t3)*cos(t4) - sin(t4)*cos(t1))*cos(t5) + sin(t1)*sin(t5)*cos(t2 + t3))*cos(t6) - (sin(t1)*sin(t4)*sin(t2 + t3) + cos(t1)*cos(t4))*sin(t6)
+        trans[2,0] =  (-sin(t5)*sin(t2 + t3) + cos(t4)*cos(t5)*cos(t2 + t3))*cos(t6) - sin(t4)*sin(t6)*cos(t2 + t3)
+        trans[0,1] = -((sin(t1)*sin(t4) + sin(t2 + t3)*cos(t1)*cos(t4))*cos(t5) + sin(t5)*cos(t1)*cos(t2 + t3))*sin(t6) - (-sin(t1)*cos(t4) + sin(t4)*sin(t2 + t3)*cos(t1))*cos(t6)
+        trans[1,1] =  -((sin(t1)*sin(t2 + t3)*cos(t4) - sin(t4)*cos(t1))*cos(t5) + sin(t1)*sin(t5)*cos(t2 + t3))*sin(t6) - (sin(t1)*sin(t4)*sin(t2 + t3) + cos(t1)*cos(t4))*cos(t6)
+        trans[2,1] = -(-sin(t5)*sin(t2 + t3) + cos(t4)*cos(t5)*cos(t2 + t3))*sin(t6) - sin(t4)*cos(t6)*cos(t2 + t3)
+        trans[0,2] =  -(sin(t1)*sin(t4) + sin(t2 + t3)*cos(t1)*cos(t4))*sin(t5) + cos(t1)*cos(t5)*cos(t2 + t3)
+        trans[1,2] =  -(sin(t1)*sin(t2 + t3)*cos(t4) - sin(t4)*cos(t1))*sin(t5) + sin(t1)*cos(t5)*cos(t2 + t3)
+        trans[2,2] =  -sin(t5)*cos(t4)*cos(t2 + t3) - sin(t2 + t3)*cos(t5)
+        trans[0,3] =  a1*cos(t1) + a2*sin(t2)*cos(t1) + a3*sin(t2 + t3)*cos(t1) + d4*cos(t1)*cos(t2 + t3) + d6*(-(sin(t1)*sin(t4) + sin(t2 + t3)*cos(t1)*cos(t4))*sin(t5) + cos(t1)*cos(t5)*cos(t2 + t3))
+        trans[1,3] =  a1*sin(t1) + a2*sin(t1)*sin(t2) + a3*sin(t1)*sin(t2 + t3) + d4*sin(t1)*cos(t2 + t3) + d6*(-(sin(t1)*sin(t2 + t3)*cos(t4) - sin(t4)*cos(t1))*sin(t5) + sin(t1)*cos(t5)*cos(t2 + t3))
+        trans[2,3] =  a2*cos(t2) + a3*cos(t2 + t3) - d4*sin(t2 + t3) - d6*(sin(t5)*cos(t4)*cos(t2 + t3) + sin(t2 + t3)*cos(t5))
 
-        trans[0,0] =  s6*(s1*c4-c1*s4*c23)+c6*(c5*(s4*s1+c4*c1*c23)-s5*c1*s23)
-        trans[1,0] = -s6*(c1*c4+s1*s4*c23)-c6*(c5*(s4*c1-c4*s1*c23)+s1*s5-s23)
-        trans[2,0] =  c6*(c23*s5+s23*c4*c5)-s23*s4*s6
-        trans[0,1] =  c6*(s1*c4-s4*c1*c23)-s6*(c5*(s1*s4+c1*c4*c23)-s5*c1*s23)
-        trans[1,1] =  s6*(c5*(c1*s4-s1*c4*c23)+s1*s5*s23)-c6*(c1*c4+s1*s4*c23)
-        trans[2,1] = -s6*(s5*c23+c4*c5*s23)-s23*s4*c6
-        trans[0,2] =  s5*(s1*s4+c1*c23*c4)+s23*c1*c5
-        trans[1,2] =  s1*s23*c5-s5*(c1*s4-s1*c4*c23)
-        trans[2,2] =  c4*s5*s23-c5*c23
-        trans[0,3] =  c1*(param[0]+param[2]*c23-param[4]*s23+param[1]*c2)
-        trans[1,3] =  s1*(param[0]+param[2]*c23-param[4]*s23+param[1]*c2)
-        trans[2,3] =  param[3]+param[2]*s23+param[4]*c23+param[1]*s2
-
+        print(trans)
         end_pos = trans_to_pose(trans)
 
         return end_pos
 
     def calc_inverse_kinematics(self, end_pos: list):
         end_pos = np.array(end_pos)
-        joint_pos = np.zeros(3)
-        
-        
+        joint_pos = np.zeros(6)
+        trans = pose_to_trans(end_pos)
+        a1, a2, a3, d4, d6  = self.__param
+        nx,ox,ax,px = trans[0,:]
+        ny,oy,ay,py = trans[1,:]
+        nz,oz,az,pz = trans[2,:]
+
+        joint_pos[0] = atan2(py-ay*d6,px-ax*d6)*TO_DEG
         return joint_pos
 
 six_axis = SixAxisRobot()
-joint_pos = six_axis.calc_forward_kinematics([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
-print(f"The end_pos of six_axis is {joint_pos}")
+end_pos = six_axis.calc_forward_kinematics([10.0, 20.0, 30.0, 10.0, 20.0, 30.0])
+print(f"The end_pos of six_axis is {end_pos}")
+joint_pos = six_axis.calc_inverse_kinematics(end_pos)
+print(f"The joint_pos of six_axis is {joint_pos}")

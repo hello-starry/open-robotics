@@ -56,11 +56,11 @@ def dh_view(dh_list, dh_type="mdh"):
     ax.set_xlabel("x(m)")
     ax.set_ylabel("y(m)")
     ax.set_zlabel("z(m)")
-    ax.set_xlim3d(-300, 300)
-    ax.set_ylim3d(-300, 300)
-    ax.set_zlim3d(0, 600)
+    ax.set_xlim3d(-100, 100)
+    ax.set_ylim3d(-100, 100)
+    ax.set_zlim3d(0, 200)
     
-    scale = 50
+    scale = 30
     
     for i in range(T_list.shape[0]-1):
         ax.plot([T_list[i, 0, 3], T_list[i+1, 0, 3]],
@@ -100,12 +100,12 @@ if __name__ == "__main__":
 
     ## SixAxis
     # MDH参数表  a     alpha       d       theta
-    dh_list = [[ 0.0,    0,      242,     0.0],
-               [ 50.0,  -90,     0.0,    -90.0],
-               [ 225.0,  0.0,   0.0,     0.0],
-               [ 50.0,  -90.0,   200.0,  0.0],
-               [ 0.0,    90.0,    0.0,     0.0],
-               [ 0.0,   -90.0,    50.0,    0.0]]
+    dh_list = [[ 0.0,    0,      0,       0.0],
+               [ 10.0,  -90,     0.0,    -90.0],
+               [ 20.0,  0.0,     0.0,     0.0],
+               [ 30.0,  -90.0,   40.0,    0.0],
+               [ 0.0,    90.0,    0.0,    0.0],
+               [ 0.0,   -90.0,    50.0,   30.0]]
     dh_view(dh_list, dh_type="mdh")
     
     # # DH参数表   a      alpha       d       theta
